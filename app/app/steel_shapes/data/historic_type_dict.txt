@@ -1,0 +1,13 @@
+{
+	"wide flange": ["BWF", "LWF", "W", "WF", "WFB", "WFCB"],
+	"other beam": ["B", "BCB", "BL", "BLB", "CB", "G", "I", "J", "JR", "M", "S", "T FS", "WFB", "WFCB"],
+	"tee": ["MT", "ST", "ST B", "ST I", "ST JR", "ST M", "ST WF", "T FS", "WT"],
+	"channel": ["C", "JRU", "MC", "U"],
+	"angle": ["2L", "L"],
+	"column":["JRC", "LWF"],
+	"pile":["BP", "HP"],
+	"tube": ["HSS", "ST R", "ST S"],
+	"pipe": ["P", "PIPE", "XP", "XXP"],
+	"joist":["BJ"],
+	"z": ["Z"]
+}

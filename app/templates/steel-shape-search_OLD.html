@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<head>
+  <!-- update js file directory -->
+  <script src="{{ url_for('static', filename='js/steel-shape-search.js') }}"></script>
+
+  <style>
+    .link-class:hover{
+     background-color:#f1f1f1;
+    }
+  </style>
+
+</head>
+
+<h1>AISC (15th ed.) Steel Shape Properties</h1>
+
+<input type="text" name="search" id="search" placeholder="Live Search" class="form-control" /><br>
+
+<ul class="list-group" id="result"></ul>
+
+<div class="column">
+  <form method="POST" action="/steel-shapes">
+
+    {{ form.hidden_tag() }}
+
+    <br>
+    {{ form.shape_section.label }}
+    {{ form.shape_section(class="btn btn-dark dropdown-toggle") }} <br><br>
+    {{ form.shape_designation.label }}
+    {{ form.shape_designation(class="btn btn-dark dropdown-toggle") }} <br><br>
+    {{ form.shape_label.label }}
+    {{ form.shape_label(class="btn btn-dark dropdown-toggle") }} <br><br>
+    {{ form.submit(class="btn btn-dark") }}
+
+  </form>
+</div>
+
+<script>
+
+$(document).ready(function(){
+
+  $.ajaxSetup({ cache: false });
+  $('#search').keyup(function(){
+
+    $('#result').html('');
+    var searchField = $('#search').val().replace(/\s/g, '');
+    var expression = new RegExp(searchField, "i");
+
+    $.getJSON('/shape-labels', function(data) {
+     $.each(data.labels, function(key, value){
+      if (value.search(expression) != -1)
+      {
+        $('#result').append('<li class="list-group-item link-class">' + value + '</li>');
+        // console.log(value);
+      }
+     });
+    });
+
+    $('#result').on('click', 'li', function() {
+    var click_text = $(this).text().split('|');
+    $('#search').val($.trim(click_text[0]));
+    $("#result").html('');
+    });
+
+  });
+
+});
+
+</script>
+
+{% endblock %}

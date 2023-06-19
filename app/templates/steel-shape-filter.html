@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h1>AISC (15th ed.) Steel Shape Filter</h1>
+
+<div class="column">
+  <form method="POST" action="shape-filter">
+
+    {{ form.hidden_tag() }}
+
+    <br>
+
+    {% for field, errors in form.errors.items() %}
+      <div class="alert alert-danger">
+        {{ ', '.join(errors) }}<br>
+      </div>
+    {% endfor %}
+
+    <table>
+
+      <th>minimum</th>
+      <th>property</th>
+      <th>maximum</th>
+
+
+      {% for field in form %}
+
+      <tr>
+        <td>{{ field(class="txt-inp") }}</td>
+        <td>≤ label ≤</td>
+        <td>{{ field(class="txt-inp") }}</td>
+      </tr>
+
+      {% endfor %}
+    </table>
+    <br>
+    {{ form.submit(class="btn btn-dark") }}
+
+  </form>
+
+</div>
+
+
+{% endblock %}

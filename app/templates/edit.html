@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{{ form.hidden_tag() }}
+
+{% for field in form if field.widget.input_type != 'hidden'%}
+  {{ field.label }}
+  {{ field.name }}
+
+{% endfor %}
+
+{% endblock %}

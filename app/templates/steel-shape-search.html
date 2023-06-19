@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<head>
+
+  <style>
+    .link-class:hover{
+     background-color:#f1f1f1;
+    }
+  </style>
+
+</head>
+
+<h1>AISC (15th ed.) Steel Shape Properties</h1>
+
+<div class="column">
+  <form method="POST" action="/">
+    <input type="text" name="shape-label" id="shape-label" placeholder="enter shape" class="form-control" required /><br>
+    <input type="submit" class="btn btn-dark" value="Submit">
+  </form><br>
+
+  <ul class="list-group" id="result"></ul>
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+
+  $.ajaxSetup({ cache: false });
+  $('#shape-label').keyup(function(){
+
+    $('#result').html('');
+    var searchField = $('#shape-label').val().replace(/\s/g, '');
+    var expression = new RegExp(searchField, "i");
+
+    $.getJSON('/shape-labels', function(data) {
+     $.each(data.shape_labels, function(key, value){
+      if (value.search(expression) != -1)
+      {
+        $('#result').append('<li class="list-group-item link-class">' + value + '</li>');
+        // console.log(value);
+      }
+     });
+    });
+
+    $('#result').on('click', 'li', function() {
+      var click_text = $(this).text().split('|');
+      $('#shape-label').val($.trim(click_text[0]));
+      $("#result").html('');
+    });
+
+  });
+
+});
+
+</script>
+
+{% endblock %}

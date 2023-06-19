@@ -1,0 +1,1 @@
+[{"name": "weight", "label": "Weight (plf)"}, {"name": "area", "label": "Area (in<sup>2</sup>)"}, {"name": "depth", "label": "d (in)", "regex_val": "(\\d+[\\/\\d. ]*|\\d)", "err_msg": "Depth: Enter only decimal or fraction input"}]
